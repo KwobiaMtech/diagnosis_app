@@ -147,3 +147,23 @@ DELETE diagnosis code record
 http://127.0.0.1:8000/codes?id=260281
 ACTION: DELETE
 ```
+
+GET diagnosis code recored
+
+```
+http://127.0.0.1:8000/codes?id=260281
+ACTION: GET
+TYPE: JSON
+RESPONSE SAMPLE: 
+{
+    "id": 260212,
+    "created": "2021-02-08T20:06:39.856976Z",
+    "category_code": "A00",
+    "diagnosis_code": "0",
+    "full_code": "A000",
+    "ab_description": "Cholera due to Vibrio cholerae 01, biovar cholerae",
+    "full_description": "Cholera due to Vibrio cholerae 01, biovar cholerae",
+    "category_title": "Cholera"
+}
+
+```
