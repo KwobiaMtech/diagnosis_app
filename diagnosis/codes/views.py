@@ -1,11 +1,7 @@
-import csv
-import io
-
 from django.forms import model_to_dict
 from django.shortcuts import render, get_object_or_404
 from django.core.exceptions import *
 from rest_framework.renderers import TemplateHTMLRenderer
-# import pusher
 from rest_framework.viewsets import ModelViewSet
 
 from .models import Codes, ICD
@@ -15,14 +11,6 @@ from rest_framework.response import Response
 from rest_framework import status
 import pandas as pd
 from .paginations import CustomPagination
-
-"""pusher_client = pusher.Pusher(
-    app_id='1151410',
-    key='f0870f9290a23dc9e32c',
-    secret='6104f860e79b2589cd4a',
-    cluster='mt1',
-    ssl=True
-)"""
 
 
 def saveToDataBase(codes=None, icd_id=None) -> object:
