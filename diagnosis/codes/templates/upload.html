@@ -1,0 +1,15 @@
+{% block content %}
+
+  <form action="{% url "upload" %}" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <input type="file" name="csv_file">
+    <input type="submit" value="submit" />
+  </form>
+
+  {% if status and status == 'success' %}
+    <p>File Uploaded Successfully</p>
+  {% elif status == 'failed' %}
+     <p>File Uploaded Failed</p>
+  {% endif %}
+
+{% endblock %}
