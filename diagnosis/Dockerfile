@@ -14,8 +14,7 @@ RUN apk update \
     && apk add linux-headers g++
 
 RUN pip install numpy && \
-    pip install pandas && \
-    pip install jupyter
+    pip install pandas
 
 # install dependencies
 RUN pip install --upgrade pip
