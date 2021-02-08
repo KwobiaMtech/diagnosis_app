@@ -26,7 +26,7 @@ Uses gunicorn + nginx.
     docker-compose -f docker-compose.prod.yml up -d --build
     ```
 
-    Test it out at [http://localhost:1439](http://localhost:1337). No mounted folders. To apply changes, the image must be re-built.
+    Test it out at [http://localhost:1439](http://localhost:1439). No mounted folders. To apply changes, the image must be re-built.
     
 #####  UPLOADING ICD-CODES  
  1.To upload sample ICD-CODES,navigate below url
