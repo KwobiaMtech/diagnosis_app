@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from codes.models import Codes, ICD
+from .models import Codes, ICD
 
 
 class SaveCodesSerializer(serializers.ModelSerializer):

@@ -3,14 +3,13 @@ import io
 
 from django.forms import model_to_dict
 from django.shortcuts import render, get_object_or_404
-
-# Create your views here.
+from django.core.exceptions import *
 from rest_framework.renderers import TemplateHTMLRenderer
 # import pusher
 from rest_framework.viewsets import ModelViewSet
 
-from codes.models import Codes, ICD
-from codes.Serializers import SaveCodesSerializer, GetCodesSerializer
+from .models import Codes, ICD
+from .Serializers import SaveCodesSerializer, GetCodesSerializer
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
@@ -85,6 +84,18 @@ class CodeListViewSet(ModelViewSet):
         instance.delete()
         instance.save()
 
+    def create(self, request, *args, **kwargs):
+        try:
+            icd_coding = model_to_dict(ICD.objects.get(name=request.data['ICD']))
+        except ObjectDoesNotExist:
+            return Response({'status': 'ICD coding category do not exist'}, status=status.HTTP_404_NOT_FOUND)
+        request.data['ICD'] = icd_coding['id']
+        serializer = SaveCodesSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        return Response(serializer.is_valid(raise_exception=True), status=status.HTTP_400_BAD_REQUEST)
+
     def list(self, request, *args, **kwargs):
         icd_name = ''
         if 'ICD' in request.GET:
@@ -113,6 +124,3 @@ class CodeListViewSet(ModelViewSet):
             "message": 'Code records.',
             "data": page
         })
-
-
-
