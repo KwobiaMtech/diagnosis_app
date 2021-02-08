@@ -20,7 +20,7 @@ class ICD(models.Model):
 
 class Codes(models.Model):
     category_code = models.CharField(max_length=100, blank=True, default='')
-    diagnosis_code = models.CharField(max_length=100, blank=True, default='',unique=True)
+    diagnosis_code = models.CharField(max_length=100, blank=True, default='', unique=True)
     full_code = models.CharField(max_length=100, blank=True, default='', unique=True)
     ab_description = models.CharField(max_length=250, blank=True, default='')
     full_description = models.CharField(max_length=250, blank=True, default='')

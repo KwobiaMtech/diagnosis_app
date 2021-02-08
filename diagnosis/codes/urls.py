@@ -1,10 +1,11 @@
 from django.conf.urls import url
 from django.urls import path
-from codes import views
-from codes.views import CodeListViewSet
+from .views import CodeListViewSet, FileUpload
 
 urlpatterns = [
-    path('upload/', views.FileUpload.as_view(),name='upload'),
+    path('', FileUpload.as_view(), name='upload'),
+    path('upload/', FileUpload.as_view(), name='upload'),
+    path('', FileUpload.as_view(), name='upload'),
 
     url(r'^codes$', CodeListViewSet.as_view(
         {
