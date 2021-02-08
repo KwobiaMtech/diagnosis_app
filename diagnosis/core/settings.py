@@ -36,9 +36,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
-    'codes',
-    'import_export',
-    'django_crontab',
+    'codes'
 ]
 
 MIDDLEWARE = [
@@ -128,6 +126,3 @@ REST_FRAMEWORK = {
     ],
 }
 
-CRONJOBS = [
-    ('*/2 * * * *', 'codes.cron.my_cron_job', '>> core/cron.log')
-]
