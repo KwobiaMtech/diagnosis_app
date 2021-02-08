@@ -11,6 +11,11 @@ ENV PYTHONUNBUFFERED 1
 # install psycopg2 dependencies
 RUN apk update \
     && apk add postgresql-dev gcc python3-dev musl-dev
+    && apk add linux-headers g++
+
+RUN pip install numpy && \
+    pip install pandas && \
+    pip install jupyter
 
 # install dependencies
 RUN pip install --upgrade pip
