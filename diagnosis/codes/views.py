@@ -93,7 +93,7 @@ class CodeListViewSet(ModelViewSet):
 
         try:
             page = self.paginate_queryset(queryset)
-        except Exception as e:
+        except Exception:
             page = []
             data = page
             return Response({
