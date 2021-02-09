@@ -75,9 +75,9 @@ WSGI_APPLICATION = 'core.wsgi.application'
 DATABASES = {
     "default": {
         "ENGINE": os.environ.get("SQL_ENGINE", "django.db.backends.postgresql"),
-        "NAME": os.environ.get("SQL_DATABASE", 'icd_dev'),
-        "USER": os.environ.get("SQL_USER", "icduser"),
-        "PASSWORD": os.environ.get("SQL_PASSWORD", "icdpass"),
+        "NAME": os.environ.get("SQL_DATABASE", 'diagnosis'),
+        "USER": os.environ.get("SQL_USER", "patrick"),
+        "PASSWORD": os.environ.get("SQL_PASSWORD", "osofo"),
         "HOST": os.environ.get("SQL_HOST", "localhost"),
         "PORT": os.environ.get("SQL_PORT", "5432"),
     }
