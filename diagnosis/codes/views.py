@@ -12,23 +12,6 @@ from rest_framework.response import Response
 from rest_framework import status
 from .paginations import CustomPagination
 
-
-def saveToDataBase(codes=None, icd_id=None) -> object:
-    sending = {
-        'category_code': codes[0],
-        'diagnosis_code': codes[1],
-        'full_code': codes[2],
-        'ab_description': codes[3],
-        'full_description': codes[4],
-        'category_title': codes[5],
-        'ICD': icd_id
-    }
-    print(sending)
-    serializer = SaveCodesSerializer(data=sending)
-    if serializer.is_valid():
-        serializer.save()
-
-
 def createGetICD():
     icd_code = ICD.objects.all().values().first()
     if not icd_code:
