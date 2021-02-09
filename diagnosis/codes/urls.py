@@ -5,8 +5,7 @@ from .views import CodeListViewSet, FileUpload
 urlpatterns = [
     path('', FileUpload.as_view(), name='upload'),
     path('upload/', FileUpload.as_view(), name='upload'),
-    path('', FileUpload.as_view(), name='upload'),
-
+    # API ROUTES
     url(r'^codes$', CodeListViewSet.as_view(
         {
             'get': 'retrieve',
