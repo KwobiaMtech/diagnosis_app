@@ -53,7 +53,6 @@ class FileUpload(APIView):
                     saveToDataBase(item, icd_id)
             return Response({'status': 'success'}, template_name='upload.html')
         except Exception as e:
-            print(e)
             return Response({'status': 'failed', 'message': e}, template_name='upload.html',
                             status=status.HTTP_400_BAD_REQUEST)
 
