@@ -24,7 +24,7 @@ SECRET_KEY = 'j2qb)+kll-vngv)argh8!ii54+n+)kooi%dz+(fx68vm@@s=dp'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = os.environ.get("DJANGO_ALLOWED_HOSTS", [])
 
 # Application definition
 
