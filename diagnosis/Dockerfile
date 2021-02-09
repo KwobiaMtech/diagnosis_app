@@ -12,9 +12,6 @@ ENV PYTHONUNBUFFERED 1
 RUN apk update \
     && apk add --no-cache postgresql-dev gcc python3-dev musl-dev linux-headers g++
 
-RUN pip install numpy && \
-    pip install pandas
-
 # install dependencies
 RUN pip install --upgrade pip
 COPY ./requirements.txt .

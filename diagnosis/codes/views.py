@@ -1,15 +1,15 @@
+from django.core.files.storage import default_storage
 from django.forms import model_to_dict
 from django.shortcuts import get_object_or_404
 from django.core.exceptions import *
 from rest_framework.renderers import TemplateHTMLRenderer
 from rest_framework.viewsets import ModelViewSet
-
+from .helpers.imports import import_process
 from .models import Codes, ICD
 from .Serializers import SaveCodesSerializer, GetCodesSerializer
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
-import pandas as pd
 from .paginations import CustomPagination
 
 
@@ -23,6 +23,7 @@ def saveToDataBase(codes=None, icd_id=None) -> object:
         'category_title': codes[5],
         'ICD': icd_id
     }
+    print(sending)
     serializer = SaveCodesSerializer(data=sending)
     if serializer.is_valid():
         serializer.save()
@@ -45,16 +46,13 @@ class FileUpload(APIView):
         return Response({}, template_name='upload.html')
 
     def post(self, request):
-        icd_id = createGetICD()
-        try:
-            for chunk in pd.read_csv(request.FILES['csv_file'].file, chunksize=100000, header=None):
-                chunk_list = chunk.values.tolist()
-                for i, item in enumerate(chunk_list):
-                    saveToDataBase(item, icd_id)
-            return Response({'status': 'success'}, template_name='upload.html')
-        except Exception as e:
-            return Response({'status': 'failed', 'message': e}, template_name='upload.html',
-                            status=status.HTTP_400_BAD_REQUEST)
+        if request.method == 'POST':
+            file = request.FILES["csv_file"]
+            file_name = default_storage.save(file.name, file)
+            if import_process(file_name):
+                return Response({'status': 'success'}, template_name='upload.html')
+        return Response({'status': 'failed'}, template_name='upload.html',
+                        status=status.HTTP_400_BAD_REQUEST)
 
 
 class CodeListViewSet(ModelViewSet):
