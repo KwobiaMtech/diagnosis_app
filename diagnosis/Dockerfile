@@ -23,6 +23,8 @@ COPY ./entrypoint.sh .
 # allow permission on entrypoint
 RUN chmod +x entrypoint.sh
 
+RUN chmod +x /usr/src/app/entrypoint.sh
+
 # copy project
 COPY . .
 
