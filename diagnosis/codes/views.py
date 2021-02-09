@@ -12,6 +12,7 @@ from rest_framework.response import Response
 from rest_framework import status
 from .paginations import CustomPagination
 
+
 def createGetICD():
     icd_code = ICD.objects.all().values().first()
     if not icd_code:
