@@ -20,6 +20,7 @@ RUN pip install -r requirements.txt
 # copy entrypoint.sh
 COPY ./entrypoint.sh .
 
+# allow permission on entrypoint
 RUN sudo chmod +x entrypoint.sh
 
 # copy project
