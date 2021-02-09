@@ -19,7 +19,7 @@ services:
     environment:
       - POSTGRES_USER=icd_user
       - POSTGRES_PASSWORD=icdpass
-      - POSTGRES_DB=diagnosis_db
+      - POSTGRES_DB=diagnosis
 
 volumes:
   postgres_data:
