@@ -1,15 +1,17 @@
+from django.contrib.auth.models import User
 from django.core.files.storage import default_storage
 from django.forms import model_to_dict
 from django.shortcuts import get_object_or_404
 from django.core.exceptions import *
+from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework.renderers import TemplateHTMLRenderer
 from rest_framework.viewsets import ModelViewSet
 from .helpers.imports import import_process
 from .models import Codes, ICD
-from .Serializers import SaveCodesSerializer, GetCodesSerializer
+from .Serializers import SaveCodesSerializer, GetCodesSerializer, UserSerializer
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from rest_framework import status
+from rest_framework import status, generics
 from .paginations import CustomPagination
 
 
@@ -42,6 +44,7 @@ class FileUpload(APIView):
 class CodeListViewSet(ModelViewSet):
     serializer_class = GetCodesSerializer
     pagination_class = CustomPagination
+    permission_classes = [IsAuthenticated]
 
     def get_object(self):
         return get_object_or_404(Codes, id=self.request.query_params.get("id"))
@@ -93,3 +96,9 @@ class CodeListViewSet(ModelViewSet):
             "message": 'Code records.',
             "data": page
         })
+
+
+class UserCreate(generics.CreateAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+    permission_classes = (AllowAny,)
