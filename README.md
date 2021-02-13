@@ -34,10 +34,44 @@ Uses gunicorn + nginx.
     http://localhost:8000/upload
 ```
 
+### AUTHENTICATION
+create user account 
+```
+http://127.0.0.1:8000/user/register
+ACTION:POST
+DATA TYPE:JSON
+sample data:
+
+{
+    "username": "kojo",
+    "password": "kojo"
+}
+
+```
+get token
+```
+http://127.0.0.1:8000/api-token-auth/
+ACTION:POST
+DATA TYPE:JSON
+sample data:
+
+{
+    "username": "kojo",
+    "password": "kojo"
+}
+
+response sample:
+{
+    "token": "865075c0ade1c2c10c41621c25c208d1823a0767"
+}
+
+```
+
 #### TESTING API's
 pass default ICD=ICD-10 to get codes under ICD-10 updates
 ```
     http://127.0.0.1:8000/codes/all?ICD=ICD-10
+    Authorization: Token 'your created token'
 ```
 sample response (response is paginated in batches of 10)
 ```
@@ -73,6 +107,7 @@ call paginated 'next' value to get the next page data
 
 ```
 http://127.0.0.1:8000/codes/all?ICD=ICD-10&page=2
+Authorization: Token 'your created token'
 ```
 sample response
 
@@ -112,6 +147,7 @@ Create a new diagnosis code record
 URL: http://127.0.0.1:8000/codes
 ACTION: POST
 TYPE: JSON
+Authorization: Token 'your created token'
 REQUEST SAMPLE: 
 {
 
@@ -131,6 +167,7 @@ Update diagnosis code record
 http://127.0.0.1:8000/codes?id=260281
 ACTION: PUT
 TYPE: JSON
+Authorization: Token 'your created token'
 REQUEST SAMPLE: 
 {
     "category_code": "9S9DFGSDG",
@@ -145,15 +182,18 @@ REQUEST SAMPLE:
 DELETE diagnosis code record
 ```
 http://127.0.0.1:8000/codes?id=260281
+Authorization: Token 'your created token'
 ACTION: DELETE
+
 ```
 
-GET diagnosis code recored
+GET diagnosis code recorded
 
 ```
 http://127.0.0.1:8000/codes?id=260281
 ACTION: GET
 TYPE: JSON
+Authorization: Token 'your created token'
 RESPONSE SAMPLE: 
 {
     "id": 260212,
