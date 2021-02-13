@@ -22,7 +22,7 @@ def saveToDataBase(codes=None, icd_id=None) -> object:
             'ab_description': codes[3],
             'full_description': codes[4],
             'category_title': codes[5],
-            'ICD':icd_id,
+            'ICD': icd_id,
         }
         serializer = SaveCodesSerializer(data=sending)
         if serializer.is_valid(raise_exception=True):
